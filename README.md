@@ -1,113 +1,80 @@
-📊 Análise de Sentimento com Azure AI Language
-Este documento apresenta os resultados da análise de sentimento realizada pelo Azure AI Language Service em um conjunto de mensagens corporativas. O serviço avalia o sentimento geral de cada frase e documento, identificando alvos específicos e opiniões associadas.
-
-🔍 Resumo Geral
-Sentimento do documento: Misto (56% positivo, 41% negativo, 3% neutro)
-
-Confiança geral: 56%
-
-Número de frases analisadas: 14
-
-Distribuição de sentimentos:
-
-Positivo: 42.9% (6 frases)
-
-Negativo: 35.7% (5 frases)
-
-Neutro: 21.4% (3 frases)
-
-📝 Análise Detalhada por Frase
-1. "I would like to inform you that the system is slow."
-Sentimento: Positivo (58% confiança)
-
-Análise de alvo:
-
-"system": Negativo (99% confiança)
-
-Opinião: "slow" (negativo, 99%)
-
-2. "They requested a database update by Friday."
-Sentimento: Neutro (100% confiança)
-
-3. "Critical issue: server offline since 9am."
-Sentimento: Negativo (100% confiança)
-
-Análise de alvo:
-
-"server": Negativo (100% confiança)
-
-Opinião: "offline" (negativo, 100%)
-
-4. "Good morning!"
-Sentimento: Positivo (100% confiança)
-
-5. "I would like to schedule a technical visit..."
-Sentimento: Negativo (96% confiança)
-
-6. "Please get back to me with available times."
-Sentimento: Neutro (100% confiança)
-
-7. "Thank you."
-Sentimento: Positivo (99% confiança)
-
-8. "Hello, what is the procedure for requesting a new badge?"
-Sentimento: Neutro (100% confiança)
-
-9. "I lost mine and need a replacement."
-Sentimento: Negativo (100% confiança)
-
-10. "I would like to praise technical support..."
-Sentimento: Positivo (99% confiança)
-
-Análise de alvo:
-
-"technical support": Positivo (100% confiança)
-
-Opiniões:
-
-"praise" (positivo, 99%)
-
-"quickly" (positivo, 100%)
-
-11. "You guys were amazing!"
-Sentimento: Positivo (100% confiança)
-
-12. "Thank you."
-Sentimento: Positivo (100% confiança)
-
-13. "I hereby inform you that I have completed updating..."
-Sentimento: Neutro (100% confiança)
-
-14. "Any problems, I'm at your disposal."
-Sentimento: Negativo (71% confiança)
-
-📌 Principais Observações
-Problemas técnicos foram os principais causadores de sentimentos negativos, especialmente relacionados a:
-
-Sistema lento (99% negativo)
-
-Servidor offline (100% negativo)
-
-Elogios à equipe de suporte técnico geraram os sentimentos mais positivos (99-100% confiança)
-
-Comunicações neutras incluíram solicitações de procedimentos e confirmações de tarefas concluídas
-
-Apesar do tom educado ("I would like to inform..."), o conteúdo negativo sobre problemas técnicos prevaleceu na análise
-
-⚙️ Metadados Técnicos
-Model Version: 2025-01-01
-
-Número de documentos analisados: 1
-
-ID do documento: id__5726
-
-Avisos: Nenhum
-
-📈 Insights para Ação
-Priorizar a resolução dos problemas técnicos identificados (sistema lento e servidor offline)
-
-Manter a qualidade do suporte técnico, reconhecida positivamente pelos usuários
-
-Monitorar comunicações que começam de forma positiva mas contêm problemas subjacentes
-
-Este relatório foi gerado automaticamente pelo Azure AI Language Service. Para análises mais detalhadas, considere explorar a API diretamente ou integrar com ferramentas de BI.
+* 📊Azure AI Search - Configuração e Análise de Sentimentos
+* Este repositório contém um guia passo a passo para configurar uma pesquisa cognitiva com Azure AI Search,
+* integrada a modelos de análise de sentimentos do Azure AI Language. Além disso, apresenta insights,
+* ferramentas complementares e aprendizados adquiridos durante o processo.
+* 
+* 📌 Passo a Passo para Configurar uma Pesquisa com Azure AI Search
+* 1. Criar um Recurso no Azure
+*    Acesse o Portal Azure.
+* 
+* Crie um recurso do Azure AI Search.
+* 
+* Defina nome, região e tipo de pricing tier (ex: Free para testes).
+* 
+* 2. Configurar um Index (Índice de Pesquisa)
+*    No serviço criado, vá para "Índices" e clique em "+ Novo Índice".
+* 
+* Defina campos como:
+* 
+* id (chave primária)
+* 
+* text (texto a ser analisado)
+* 
+* sentiment (resultado da análise)
+* 
+* confidenceScores (pontuação de confiança)
+* 
+* 3. Integrar com Azure AI Language (Análise de Sentimentos)
+*    Habilite "Habilidades Cognitivas" (Cognitive Skills) no seu índice.
+* 
+* Adicione a habilidade "Sentiment Analysis" e associe-a ao campo text.
+* 
+* Configure para extrair frases-chave e sentimentos.
+* 
+* 4. Carregar Dados (Dataset de Exemplo)
+*    Use "Importar Dados" para subir um arquivo .json ou .csv com mensagens para análise.
+* 
+* Exemplo de estrutura:
+* 
+* {
+* "id": "1",
+* "text": "The system is very slow today.",
+* "source": "user_feedback"
+* }
+* 
+* Executar a Pesquisa e Visualizar Resultados
+* No Search Explorer, teste consultas como:
+* 
+* sentiment:positive (filtrar por sentimentos positivos)
+* 
+* search=slow&highlight=text (buscar termos negativos)
+* 
+* 🔍 Insights e Aprendizados
+* ✅ Padronização de Dados:
+* 
+* A análise de sentimentos funciona melhor quando os textos estão bem estruturados (evite gírias ou linguagem muito informal).
+* 
+* ✅ Filtros Úteis:
+* 
+* É possível segmentar resultados por nível de confiança (ex: confidenceScores.positive gt 0.7).
+* 
+* ✅ Aplicações Práticas:
+* 
+* Chatbots: Melhorar respostas automáticas com base no tom do usuário.
+* 
+* Helpdesk: Priorizar tickets com sentimentos negativos/urgentes.
+* 
+* Pesquisa de Satisfação: Analisar feedbacks de clientes em escala.
+* 
+* ⚠️ Desafios Encontrados:
+* 
+* Falsos positivos: Frases como "Não é ruim"* podem ser classificadas erroneamente.
+* 
+* Limitação de idioma: O modelo padrão tem melhor desempenho em inglês.
+* 
+* 🛠️ Ferramentas que se Beneficiam
+* Ferramenta	Aplicação
+* Power BI	Dashboard de análise de feedbacks
+* Microsoft Teams	Alertas automáticos para mensagens críticas
+* Azure Logic Apps	Automação de respostas com base no sentimento
+* CRM (Dynamics 365)	Priorização de leads/clientes insatisfeitos
